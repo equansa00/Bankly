@@ -22,8 +22,6 @@ Install npm packages:
 npm install
 Create a PostgreSQL database and run the provided seed files to set up the schema and initial data.
 
-Create a .env file in the root directory and add the necessary environment variables such as DATABASE_URL and SECRET_KEY.
-
 Running the Application
 To start the server, run:
 
