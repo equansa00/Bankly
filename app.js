@@ -41,3 +41,7 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 module.exports = app;
+
+
+//suggestions
+//1. There's a duplicated module.exports = app; at the end of the file. It's redundant, and only one instance is needed.
