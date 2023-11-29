@@ -10,18 +10,15 @@ PostgreSQL
 Installation
 Clone the repository:
 
-sh
-Copy code
+
 git clone https://github.com/your-username/bankly.git
 Navigate to the project directory:
 
-sh
-Copy code
+
 cd bankly
 Install npm packages:
 
-sh
-Copy code
+
 npm install
 Create a PostgreSQL database and run the provided seed files to set up the schema and initial data.
 
@@ -29,18 +26,15 @@ Create a .env file in the root directory and add the necessary environment varia
 
 Running the Application
 To start the server, run:
-sh
-Copy code
+
 npm start
 To run the server in development mode (with auto-restart on file changes), use:
-sh
-Copy code
+
 npm run dev
 Testing
 To run the test suite, execute:
 
-sh
-Copy code
+
 npm test
 Test Structure
 Tests are organized into two main categories:
