@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const ExpressError = require("./helpers/expressError");
 
-
 app.use(express.json());
 
 const authRoutes = require('./routes/auth');
@@ -12,6 +11,9 @@ const userRoutes = require('./routes/users');
 
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+
+require('dotenv').config();
+
 
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Bankly API!' });
