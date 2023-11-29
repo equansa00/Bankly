@@ -167,3 +167,6 @@ class User {
 }
 
 module.exports = User;
+
+//suggestion
+//1. There's a missing return statement in the get method when a user is not found. It should be return new ExpressError('No such user', 404);.
