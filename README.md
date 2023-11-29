@@ -76,6 +76,4 @@ Bug #6: SQL Injection in Partial Update
 Description: Potential SQL injection vulnerability in sqlForPartialUpdate.
 Test: it('should prevent SQL injection in partial updates', ...)
 Fix: Used parameterized queries in sqlForPartialUpdate.
-Contributions
-Contributions to Bankly are welcome. Please ensure to follow the contribution guidelines outlined in CONTRIBUTING.md.
 
