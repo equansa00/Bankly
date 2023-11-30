@@ -51,27 +51,32 @@ class User {
    * */
 
   static async authenticate(username, password) {
+    // Query the database for a user with the given username
     const result = await db.query(
-      `SELECT username,
-                password,
-                first_name,
-                last_name,
-                email,
-                phone,
-                admin
-            FROM users 
-            WHERE username = $1`,
-      [username]
+        `SELECT username, password, first_name, last_name, email, phone, admin
+         FROM users WHERE username = $1`, [username]
     );
 
     const user = result.rows[0];
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      return user;
-    } else {
-      throw new ExpressError('Cannot authenticate', 401);
+    // Log the user object for debugging
+    console.log("User found:", user);
+
+    // Check if user exists and password matches
+    if (user) {
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+        // Log the result of the password comparison
+        console.log("Password match:", isPasswordMatch);
+
+        if (isPasswordMatch) {
+            return user;
+        }
     }
-  }
+
+    // If no user is found or password doesn't match, throw an error
+    throw new ExpressError('Cannot authenticate', 401);
+}
 
   /** Returns list of user info:
    *
@@ -113,7 +118,7 @@ class User {
     const user = result.rows[0];
 
     if (!user) {
-      new ExpressError('No such user', 404);
+      throw new ExpressError('No such user', 404);
     }
 
     return user;

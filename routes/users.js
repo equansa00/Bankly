@@ -63,14 +63,22 @@ router.get('/:username', authUser, requireLogin, async function(
  *
  */
 
-router.patch('/:username', authUser, requireLogin, requireAdmin, async function(
-  req,
-  res,
-  next
-) {
+router.patch('/:username', authUser, async function(req, res, next) {
   try {
+    // Check for non-existent fields first
+    const allowedFields = ['first_name', 'last_name', 'phone', 'email'];
+    for (const field in req.body) {
+      if (!allowedFields.includes(field) && field !== '_token') {
+        throw new ExpressError(`Cannot update field: ${field}`, 400);
+      }
+    }
+
+    // Authentication and Authorization checks
+    if (!req.curr_username) {
+      throw new ExpressError('Unauthorized', 401);
+    }
     if (!req.curr_admin && req.curr_username !== req.params.username) {
-      throw new ExpressError('Only  that user or admin can edit a user.', 401);
+      throw new ExpressError('Only that user or an admin can edit a user.', 401);
     }
 
     // get fields to change; remove token so we don't try to change it
@@ -83,6 +91,7 @@ router.patch('/:username', authUser, requireLogin, requireAdmin, async function(
     return next(err);
   }
 }); // end
+
 
 /** DELETE /[username]
  *
